@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include "ini.h"
 
 struct SimData{
     std::string gun_name;
@@ -21,11 +22,10 @@ struct SimData{
 class Simulation{
 public:
     Simulation(){};
-    bool loadData();
-
-private:
-
     ~Simulation(){};
+    bool loadData();
+private:
+    SimData data;
 };
 
 class Force{

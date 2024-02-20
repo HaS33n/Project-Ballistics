@@ -1,7 +1,14 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
+#include <cmath>
 #include "ini.h"
+
+namespace sf{
+    typedef sf::Vector3<double> Vector3d;
+}
+
+double degToRad(double deg);
 
 struct SimData{
     std::string gun_name;
@@ -15,38 +22,31 @@ struct SimData{
     double mass;
     double muzzle_velocity;
     double gun_elevation;
-    int v_caliber; //mm
+    double v_caliber; //mm
 
-};
-
-class Simulation{
-public:
-    Simulation(){};
-    ~Simulation(){};
-    bool loadData();
-private:
-    SimData data;
-};
-
-class Force{
-public:
-    Force();
-    Force(sf::Vector3f v, float val){vec = v; value = val;}
-    //todo resultant vector calcs
-private:
-    sf::Vector3f vec;
-    float value;
 };
 
 class Projectile{
 public:
     Projectile();
-    void update();
+    void init(double v0, double phi, double m, double cal); //phi = angle
 private:
     void calculateNewPosition();
     void calculateNewVelocity();
     void calculateNewForces();
-    sf::Vector3f velocity, position, resultant_force;
-    std::vector<Force> forces;
-    float mass, surface, drag_coeff;
+
+    sf::Vector3d velocity, position, resultant_force;
+    double angle;
+    std::vector<sf::Vector3d> forces;
+    double mass, area, drag_coeff;
+};
+
+class Simulation{
+public:
+    Simulation();
+    bool loadData();
+    void update(const sf::Time& time);
+private:
+    SimData _data;
+    Projectile _projectile;
 };

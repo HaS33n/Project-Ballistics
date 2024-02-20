@@ -9,7 +9,9 @@ public:
 private:
     void updateWindow();
     void calculatePhysics();
-    Simulation simulation;
+
+    Simulation _simulation;
     sf::RenderWindow _window;   
-    sf::Event _event; 
+    sf::Event _event;
+    sf::Clock _main_app_clock;
 };

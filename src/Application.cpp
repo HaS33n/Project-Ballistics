@@ -2,11 +2,11 @@
 
 Application::Application(){
 	//create and configure new window
-    _window.create(sf::VideoMode(800,600),"Project Ballistics");
+    _window.create(sf::VideoMode(800,600),"Project Ballistics!");
     _window.setFramerateLimit(75);
 
 	//load simulation data
-	if(!simulation.loadData())
+	if(!_simulation.loadData())
 		exit(EXIT_FAILURE);
 }
 
@@ -22,6 +22,7 @@ void Application::run(){
 				break;
 			}
 		}
+		_simulation.update(_main_app_clock.restart());
 		updateWindow();
 	}
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Objects.hpp"
 
 class Application{
@@ -8,7 +9,6 @@ public:
     void run();
 private:
     void updateWindow();
-    void calculatePhysics();
 
     Simulation _simulation;
     sf::RenderWindow _window;   

@@ -1,16 +1,29 @@
 #include "../include/Application.hpp"
 
 Application::Application(){
-	//create and configure new window
-    _window.create(sf::VideoMode(800,600),"Project Ballistics!");
-    _window.setFramerateLimit(75);
-
+	std::cout<<"loading simulation data... \n";
 	//load simulation data
 	if(!_simulation.loadData())
 		exit(EXIT_FAILURE);
+
+	std::cout<<"Simulation data loaded \n";
 }
 
 void Application::run(){
+	std::cout<<"Calculating projectile path, this might take a while...\n";
+	sf::Clock* calc_clk = new sf::Clock;
+
+	_simulation.runSimulation();
+
+	std::cout<<"Simulation completed, time taken: " 
+		<< calc_clk->getElapsedTime().asSeconds() << " seconds \n";
+	delete calc_clk;
+	std::cout<<"Starting Visualisation... \n";
+
+
+    _window.create(sf::VideoMode(800,600),"Project Ballistics!");
+    _window.setFramerateLimit(75);
+
     while (_window.isOpen()){
 		while (_window.pollEvent(_event)) {
 			switch (_event.type)
@@ -22,7 +35,6 @@ void Application::run(){
 				break;
 			}
 		}
-		_simulation.update(_main_app_clock.restart());
 		updateWindow();
 	}
 }

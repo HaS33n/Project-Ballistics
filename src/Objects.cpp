@@ -60,6 +60,11 @@ void Projectile::_calculateVelocity(const double & t){
 	double z = a.z * t;
 
 	velocity += {x,y,z};
+	if(velocity.x < 0)
+		velocity.x = 0;
+
+	if(velocity.z < 0)
+		velocity.z = 0;
 }
 
 void Projectile::_updateForces(){
@@ -110,7 +115,7 @@ bool Simulation::loadData(){
 	_projectile.init(_data.muzzle_velocity, _data.gun_elevation, _data.mass, _data.v_caliber);
 
 
-	output.open("calculated_ballistic_curve.bcf", std::ios::app | std::ios::trunc);
+	output.open("calculated_ballistic_curve.bcf", std::ios::out | std::ios::trunc);
 	if(!output.good())
 		return false;
 
@@ -130,15 +135,10 @@ void Simulation::savePoint(){
 void Simulation::runSimulation(){
 	output<<_data.step<<"\n";
 	savePoint();
-	long double count = 0;
 
 	do{
 		_projectile.makeCalculations(_data.step);
 		savePoint();
-		count++;
-
-		if(count>30000)
-			break;
 		
 	}while(_projectile.getPosition().y > 0);
 	output.close();

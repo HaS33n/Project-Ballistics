@@ -3,8 +3,11 @@
 Application::Application(){
 	std::cout<<"loading simulation data... \n";
 	//load simulation data
-	if(!_simulation.loadData())
+	if(!_simulation.loadData()){
+		std::cout<<"loading failure! \n";
 		exit(EXIT_FAILURE);
+	}
+		
 
 	std::cout<<"Simulation data loaded \n";
 }

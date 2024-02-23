@@ -2,6 +2,8 @@
 
 Welcome to the Simple Ballistics Simulator project! This simulator is designed to help users understand basic principles of ballistics and simulate projectile motion under different conditions. Written in SFML.
 
+> Currently Visualisation is left to be implemented - hopefully soon
+
 ## Features
 
 - Simulate projectile motion in 3D space.

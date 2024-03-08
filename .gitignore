@@ -1,8 +1,11 @@
 #bin dir
 bin/
 
-#output
-*.bcf
+#.vscode dir
+.vscode/
+
+#input and output
+#input_output/
 
 # Prerequisites
 *.d

@@ -27,6 +27,7 @@ cd Project-Ballistics
 3. Provide input for calculations (or leave default):
 
 ```bash
+cd input_output
 xdg-open calculated_ballistic_curve.bcf
 ```
 

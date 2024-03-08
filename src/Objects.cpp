@@ -34,6 +34,7 @@ void Projectile::init(double v0, double phi, double m, double cal){
 }
 
 void Projectile::_calculateResultantForce(){
+	resultant_force = {0,0,0};
 	for(auto &it : forces)
 		resultant_force += it;
 }
@@ -87,7 +88,7 @@ Simulation::Simulation(){
 }
 
 bool Simulation::loadData(){
-	mINI::INIFile inifile("simulation_data.ini");
+	mINI::INIFile inifile("input_output/simulation_data.ini");
 	mINI::INIStructure ini;
 	inifile.read(ini);
 
@@ -115,7 +116,7 @@ bool Simulation::loadData(){
 	_projectile.init(_data.muzzle_velocity, _data.gun_elevation, _data.mass, _data.v_caliber);
 
 
-	output.open("calculated_ballistic_curve.bcf", std::ios::out | std::ios::trunc);
+	output.open("input_output/calculated_ballistic_curve.bcf", std::ios::out | std::ios::trunc);
 	if(!output.good())
 		return false;
 

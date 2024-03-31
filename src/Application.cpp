@@ -1,6 +1,6 @@
 #include "../include/Application.hpp"
 
-Application::Application(){
+Application::Application() : _visualisation(_window){
 	std::cout<<"loading simulation data... \n";
 	//load simulation data
 	if(!_simulation.loadData()){
@@ -44,6 +44,6 @@ void Application::run(){
 
 void Application::updateWindow(){
     _window.clear();
-    //draw TODO
+	_visualisation.generateFrame();
     _window.display();
 }
